@@ -1,0 +1,347 @@
+<?php
+
+$maleNames = ['Александр', 'Фёдор', 'Савелий', 'Максим', 'Виктор', 'Кирилл'];
+$femaleNames = ['Мария', 'Анна', 'Александра', 'Юлия'];
+$secondNames = ['Иванов', 'Дегтярев', 'Жиленков', 'Тимофеев', 'Турин', 'Комаров', 'Панищев'];
+
+function createUsers($size) {
+	$users = [];
+	$genders = ['male', 'female'];
+	global $maleNames;
+	global $femaleNames;
+	global $secondNames;
+	$emails = ['gmail.com', 'yandex.ru', 'mail.ru'];
+	$positions = [
+		array (
+			'position' => 'junior',
+			'salary' =>
+				array (
+					'fixed_part' => 50000,
+					'bonuses' =>
+						array (
+							0 => 5000,
+							1 => 3000,
+							2 => 550,
+							3 => 450,
+						),
+				),
+		),
+		array (
+			'position' => 'middle',
+			'salary' =>
+				array (
+					'fixed_part' => 70000,
+					'bonuses' =>
+						array (
+							0 => 8000,
+							1 => 5000,
+							2 => 750,
+							3 => 1650,
+							4 => 1000,
+						),
+				),
+		),
+		array (
+			'position' => 'senior',
+			'salary' =>
+				array (
+					'fixed_part' => 90000,
+					'bonuses' =>
+						array (
+							0 => 10000,
+							1 => 1000,
+							2 => 500,
+							3 => 2000,
+							4 => 1500,
+							5 => 6000,
+						),
+				),
+		),
+	];
+
+	for ($i = 0; $i < $size; $i++) {
+		$gender = $genders[array_rand($genders)];
+		$name = $gender === 'male' ? $maleNames[array_rand($maleNames)] : $femaleNames[array_rand($femaleNames)];
+		$secondName = $secondNames[array_rand($secondNames)];
+		$email = mb_substr(
+				(function($string) {
+					$alphabet = [
+						'А' => 'A',
+						'Б' => 'B',
+						'В' => 'V',
+						'Г' => 'G',
+						'Д' => 'D',
+						'Е' => 'E',
+						'Ё' => 'Yo',
+						'Ж' => 'Zh',
+						'З' => 'Z',
+						'И' => 'I',
+						'Й' => 'Y',
+						'К' => 'K',
+						'Л' => 'L',
+						'М' => 'M',
+						'Н' => 'N',
+						'О' => 'O',
+						'П' => 'P',
+						'Р' => 'R',
+						'С' => 'S',
+						'Т' => 'T',
+						'У' => 'U',
+						'Ф' => 'F',
+						'Х' => 'H',
+						'Ц' => 'Ts',
+						'Ч' => 'Ch',
+						'Ш' => 'Sh',
+						'Щ' => 'Sch',
+						'Ы' => 'Y',
+						'Э' => 'E',
+						'Ю' => 'Yu',
+						'Я' => 'Ya',
+						'а' => 'a',
+						'б' => 'b',
+						'в' => 'v',
+						'г' => 'g',
+						'д' => 'd',
+						'е' => 'e',
+						'ё' => 'yo',
+						'ж' => 'zh',
+						'з' => 'z',
+						'и' => 'i',
+						'й' => 'y',
+						'к' => 'k',
+						'л' => 'l',
+						'м' => 'm',
+						'н' => 'n',
+						'о' => 'o',
+						'п' => 'p',
+						'р' => 'r',
+						'с' => 's',
+						'т' => 't',
+						'у' => 'u',
+						'ф' => 'f',
+						'х' => 'h',
+						'ц' => 'ts',
+						'ч' => 'ch',
+						'ш' => 'sh',
+						'щ' => 'sch',
+						'ы' => 'y',
+						'э' => 'e',
+						'ю' => 'yu',
+						'я' => 'ya',
+					];
+					return strtr($string, $alphabet);
+				})($name), 0, 1) . '_' . (function($string) {
+				$alphabet = [
+					'А' => 'A',
+					'Б' => 'B',
+					'В' => 'V',
+					'Г' => 'G',
+					'Д' => 'D',
+					'Е' => 'E',
+					'Ё' => 'Yo',
+					'Ж' => 'Zh',
+					'З' => 'Z',
+					'И' => 'I',
+					'Й' => 'Y',
+					'К' => 'K',
+					'Л' => 'L',
+					'М' => 'M',
+					'Н' => 'N',
+					'О' => 'O',
+					'П' => 'P',
+					'Р' => 'R',
+					'С' => 'S',
+					'Т' => 'T',
+					'У' => 'U',
+					'Ф' => 'F',
+					'Х' => 'H',
+					'Ц' => 'Ts',
+					'Ч' => 'Ch',
+					'Ш' => 'Sh',
+					'Щ' => 'Sch',
+					'Ы' => 'Y',
+					'Э' => 'E',
+					'Ю' => 'Yu',
+					'Я' => 'Ya',
+					'а' => 'a',
+					'б' => 'b',
+					'в' => 'v',
+					'г' => 'g',
+					'д' => 'd',
+					'е' => 'e',
+					'ё' => 'yo',
+					'ж' => 'zh',
+					'з' => 'z',
+					'и' => 'i',
+					'й' => 'y',
+					'к' => 'k',
+					'л' => 'l',
+					'м' => 'm',
+					'н' => 'n',
+					'о' => 'o',
+					'п' => 'p',
+					'р' => 'r',
+					'с' => 's',
+					'т' => 't',
+					'у' => 'u',
+					'ф' => 'f',
+					'х' => 'h',
+					'ц' => 'ts',
+					'ч' => 'ch',
+					'ш' => 'sh',
+					'щ' => 'sch',
+					'ы' => 'y',
+					'э' => 'e',
+					'ю' => 'yu',
+					'я' => 'ya',
+				];
+				return strtr($string, $alphabet);
+			})($secondName)
+			. uniqid() . '@' . $emails[array_rand($emails)];
+//		$email = mb_substr(
+//			translit($name), 0, 1) . '_' . translit($secondName)
+//			. uniqid() . '@' . $emails[array_rand($emails)];
+
+		$birthday = randomDate('01.01.1970', date('d.m.Y'));
+		$position = $positions[array_rand($positions)];
+		$fixedPart = $position['salary']['fixed_part'];
+		$bonuses = $position['salary']['bonuses'];
+
+		$salary = calculateSalary($fixedPart, $bonuses);
+
+		$age = calculateAge($birthday, date('d.m.Y'));
+
+		$user = [
+			'id' => $i + 1,
+			'gender' => $gender,
+			'second_name' => $secondName,
+			'name' => $name,
+			'email' => $email,
+			'birthday' => $birthday,
+			'position_id' => $i % count($positions),
+			'position' => $position['position'],
+			'salary' => $salary,
+			'age' => $age,
+		];
+
+		$users[] = $user;
+	}
+
+	return $users;
+}
+
+function randomDate($min, $max = null) {
+	$minTimestamp = strtotime($min);
+	$maxTimestamp = $max ? strtotime($max) : time();
+	$randomTimestamp = mt_rand($minTimestamp, $maxTimestamp);
+	return date('d.m.Y', $randomTimestamp);
+}
+
+function calculateSalary($fixedPart, $bonuses) {
+	$totalBonuses = array_sum($bonuses);
+	$salaryWithoutTax = $fixedPart + $totalBonuses;
+	$salary = $salaryWithoutTax * 0.87;
+	return round($salary, 2);
+}
+
+function calculateAge($birthday, $currentDate) {
+	$birthdayTimestamp = strtotime($birthday);
+	$currentDateTimestamp = strtotime($currentDate);
+	$secondsInYear = 60 * 60 * 24 * 365.25;
+	$age = ($currentDateTimestamp - $birthdayTimestamp) / $secondsInYear;
+	return floor($age);
+}
+$users = createUsers(5);
+
+# Сортировка по возрасту
+//usort($users, function($a, $b) {
+//	return $a['age'] - $b['age'];
+//});
+
+# Сортировка по фамилии
+//usort($users, function($a, $b) {
+//	return strcmp($a['second_name'], $b['second_name']);
+//});
+
+# Семейные пары
+//$spouses = array_filter($users, function($user) use ($users) {
+//	$sameLastnameUsers = array_filter($users, function($otherUser) use ($user) {
+//		return $otherUser['second_name'] === $user['second_name'] && $otherUser['gender'] !== $user['gender'];
+//	});
+//
+//	return count($sameLastnameUsers) > 0;
+//});
+//print_r($spouses);
+
+print_r($users);
+
+
+
+//function translit($string) {
+//$alphabet = [
+//'А' => 'A',
+//'Б' => 'B',
+//'В' => 'V',
+//'Г' => 'G',
+//'Д' => 'D',
+//'Е' => 'E',
+//'Ё' => 'Yo',
+//'Ж' => 'Zh',
+//'З' => 'Z',
+//'И' => 'I',
+//'Й' => 'Y',
+//'К' => 'K',
+//'Л' => 'L',
+//'М' => 'M',
+//'Н' => 'N',
+//'О' => 'O',
+//'П' => 'P',
+//'Р' => 'R',
+//'С' => 'S',
+//'Т' => 'T',
+//'У' => 'U',
+//'Ф' => 'F',
+//'Х' => 'H',
+//'Ц' => 'Ts',
+//'Ч' => 'Ch',
+//'Ш' => 'Sh',
+//'Щ' => 'Sch',
+//'Ы' => 'Y',
+//'Э' => 'E',
+//'Ю' => 'Yu',
+//'Я' => 'Ya',
+//'а' => 'a',
+//'б' => 'b',
+//'в' => 'v',
+//'г' => 'g',
+//'д' => 'd',
+//'е' => 'e',
+//'ё' => 'yo',
+//'ж' => 'zh',
+//'з' => 'z',
+//'и' => 'i',
+//'й' => 'y',
+//'к' => 'k',
+//'л' => 'l',
+//'м' => 'm',
+//'н' => 'n',
+//'о' => 'o',
+//'п' => 'p',
+//'р' => 'r',
+//'с' => 's',
+//'т' => 't',
+//'у' => 'u',
+//'ф' => 'f',
+//'х' => 'h',
+//'ц' => 'ts',
+//'ч' => 'ch',
+//'ш' => 'sh',
+//'щ' => 'sch',
+//'ы' => 'y',
+//'э' => 'e',
+//'ю' => 'yu',
+//'я' => 'ya',
+//];
+//
+//return strtr($string, $alphabet);
+//}
